@@ -48,7 +48,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const resultPerPage = 8;
   const productsCount = await Product.countDocuments();
 
-  const apiFeature = new ApiFeatures(Product.find().populate('Users'), req.query)
+  const apiFeature = new ApiFeatures(Product.find().populate('user'), req.query)
     .search()
     .filter();
 
@@ -82,7 +82,27 @@ exports.getUserProducts = catchAsyncErrors(async (req, res, next) => {
     }
   }
   console.log("query",query);
-  const products = await Product.find({user:{_id:user.id}}).populate('User'); 
+  const products = await Product.find({user:{_id:user.id}}).populate({path:'user'})
+//   .exec(function(err, usersDocuments) {
+//     // handle err
+//     // usersDocuments formatted as desired
+//     console.log("err",err);
+//     console.log("user document",usersDocuments);
+//     return usersDocuments
+// })
+// const products=await Product.aggregate([{
+//   $group: {
+//     user:"$user"
+//   }
+// }, {
+//   $lookup: {
+//       from: "User", // collection to join
+//       localField: "user",//field from the input documents
+//       foreignField: "_id",//field from the documents of the "from" collection
+//       as: "owner"// output array field
+//   }
+// }])
+
 console.log("my products",products);
 
   res.status(200).json({

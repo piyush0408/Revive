@@ -6,7 +6,7 @@
     color: rgb(48, 48, 48);
     margin: 2vmax;
     transition: all 0.5s;
-    padding-bottom: 0.5vmax;
+    padding: 0.5vmax;
     border: 1px solid #E2E6ED;
     padding: 13px;
   }
@@ -16,9 +16,18 @@
   }
   
   .productCardHeader{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+   display: flex;
+   flex-direction: column;
+   justify-content:left;
+   align-items: flex-start;
+   width: 100%;
+   border: 1px solid black;
+   color: black;
+  
+  }
+  .ownerLink{
+    color:#656e95;
+    /* margin-left: 7px; */
   }
 
 
@@ -37,12 +46,14 @@
   .productCard > p {
     font-family: "Roboto";
     font-size: 1.2vmax;
-    margin: 1vmax 0.5vmax;
+    /* margin: 1vmax 0.5vmax; */
+    margin-top: 10px;
     margin-bottom: 0;
   }
   
   .productCard > span {
-    margin: 0.5vmax;
+    /* margin: 0.5vmax; */
+    margin-top: 10px;
     color: tomato;
     font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
     font-size: 1vmax;

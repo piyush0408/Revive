@@ -91,10 +91,8 @@ const UpdateProduct = ({ history, match }) => {
 
     myForm.set("name", name);
     myForm.set("price", price);
-    // myForm.set("description", description);
     myForm.set("category", category);
-    // myForm.set("Stock", Stock);
-
+    
     images.forEach((image) => {
       myForm.append("images", image);
     });
@@ -156,17 +154,6 @@ const UpdateProduct = ({ history, match }) => {
               />
             </div>
 
-            {/* <div>
-              <DescriptionIcon />
-
-              <textarea
-                placeholder="Product Description"
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                cols="30"
-                rows="1"
-              ></textarea>
-            </div> */}
 
             <div>
               <AccountTreeIcon />
@@ -183,16 +170,8 @@ const UpdateProduct = ({ history, match }) => {
               </select>
             </div>
 
-            {/* <div>
-              <StorageIcon />
-              <input
-                type="number"
-                placeholder="Stock"
-                required
-                onChange={(e) => setStock(e.target.value)}
-                value={Stock}
-              />
-            </div> */}
+           
+          
 
             <div id="createProductFormFile">
               <input

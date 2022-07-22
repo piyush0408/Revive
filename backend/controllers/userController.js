@@ -9,7 +9,7 @@ const cloudinary = require("cloudinary");
 // Register a User
 // exports.registerUser = catchAsyncErrors(async (req, res, next) => {
 
-//   const { name, email , tokenId} = req.body; 
+//   const { name, email , tokenId} = req.body;
 
 //   const user = await User.create({
 //     name,
@@ -40,23 +40,22 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
   // if (!isPasswordMatched) {
   //   return next(new ErrorHander("Invalid email or password", 401));
   // }
-  const { name, email } = req.body; 
+  const { name, email } = req.body;
   // res.status(200).json({
   //   success: true,
   //   name,email
   // });
-  
-  let user = await User.findOne({ email })
-  
-  if(!user)
-  {
+
+  let user = await User.findOne({ email });
+
+  if (!user) {
     user = await User.create({
       name,
-      email
-   });
- }
-  
-sendToken(user,200, res);
+      email,
+    });
+  }
+
+  sendToken(user, 200, res);
 });
 
 // Logout User
@@ -80,7 +79,7 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 //     return next(new ErrorHander("User not found", 404));
 //   }
 
-  // Get ResetPassword Token
+// Get ResetPassword Token
 //   const resetToken = user.getResetPasswordToken();
 
 //   await user.save({ validateBeforeSave: false });
@@ -181,37 +180,40 @@ exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
 // update User Profile
 exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   const newUserData = {
-    name: req.body.name,
-    email: req.body.email,
+   ...req.body
+
   };
   console.log("updating user");
-  console.log(req.body);
+  // console.log(req.body);
+  const  userDetails= await User.findById(req.user.id);
 
-   {
-    const user = await User.findById(req.user.id);
-     console.log("user avtar", user.avatar);
-   if(user.avatar?.public_id!=="")
-   {
-     console.log("avatar is not empty..");  
-     const imageId = user.avatar?.public_id;
-       await cloudinary.v2.uploader.destroy(imageId);
-   } 
+  if (req.body.avatar !== "") {
+    console.log("user avtar");
+    const user=userDetails;
+    if (user.avatar?.public_id!==""||user.avatar.public_id) {
+      console.log("public id exist...",user.public_id);
+      const imageId = user.avatar?.public_id;
+      await cloudinary.v2.uploader.destroy(imageId);
+    }
+     console.log("new avatart not set");
    
-
-
     const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
       folder: "avatars",
       width: 150,
       crop: "scale",
     });
-
+    console.log("new avatart set");
     newUserData.avatar = {
       public_id: myCloud.public_id,
       url: myCloud.secure_url,
     };
   }
+  else
+  {
+    newUserData.avatar=userDetails.avatar;
+  }
 
-  console.log("updating avatar",newUserData.avatar);
+  console.log("updating avatar", newUserData.avatar);
 
   const user = await User.findByIdAndUpdate(req.user.id, newUserData, {
     new: true,

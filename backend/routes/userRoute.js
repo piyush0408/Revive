@@ -9,7 +9,7 @@ const {
 //   updatePassword,
   updateProfile,
 //   getAllUser,
-//   getSingleUser,
+  getSingleUser,
 //   updateUserRole,
 //   deleteUser,
 } = require("../controllers/userController");
@@ -37,9 +37,9 @@ router.route("/me/update").put(isAuthenticatedUser, updateProfile);
 //   .route("/admin/users")
 //   .get(isAuthenticatedUser, authorizeRoles("admin"), getAllUser);
 
-// router
-//   .route("/admin/user/:id")
-//   .get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser)
+router
+  .route("/user/:id")
+  .get(isAuthenticatedUser, authorizeRoles("admin"), getSingleUser)
 //   .put(isAuthenticatedUser, authorizeRoles("admin"), updateUserRole)
 //   .delete(isAuthenticatedUser, authorizeRoles("admin"), deleteUser);
 
