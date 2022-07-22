@@ -28,7 +28,12 @@ exports.createProduct = catchAsyncErrors(async (req, res, next) => {
   }
 
   req.body.images = imagesLinks;
-  req.body.user = req.user.id;
+  // const newUser=req.user;
+  // newUser._id=String(req.user.id);
+  
+  // console.log("newUser",newUser);
+  req.body.user =req.user;
+  // console.log(req.user);
 
   const product = await Product.create(req.body);
 
@@ -43,7 +48,7 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   const resultPerPage = 8;
   const productsCount = await Product.countDocuments();
 
-  const apiFeature = new ApiFeatures(Product.find(), req.query)
+  const apiFeature = new ApiFeatures(Product.find().populate('Users'), req.query)
     .search()
     .filter();
 
@@ -64,9 +69,21 @@ exports.getAllProducts = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-// Get All Product (Admin)
-exports.getAdminProducts = catchAsyncErrors(async (req, res, next) => {
-  const products = await Product.find();
+// Get All Product of user
+exports.getUserProducts = catchAsyncErrors(async (req, res, next) => {
+  
+  const user= req.user;
+  console.log("product owner", user);
+  console.log("product owner id", user._id);
+
+  const query={
+    user:{
+      _id:user.id
+    }
+  }
+  console.log("query",query);
+  const products = await Product.find({user:{_id:user.id}}).populate('User'); 
+console.log("my products",products);
 
   res.status(200).json({
     success: true,

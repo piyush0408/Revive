@@ -4,9 +4,9 @@ import {
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
   ALL_PRODUCT_SUCCESS,
-  ADMIN_PRODUCT_REQUEST,
-  ADMIN_PRODUCT_SUCCESS,
-  ADMIN_PRODUCT_FAIL,
+  USER_PRODUCT_REQUEST,
+  USER_PRODUCT_SUCCESS,
+  USER_PRODUCT_FAIL,
   NEW_PRODUCT_REQUEST,
   NEW_PRODUCT_SUCCESS,
   NEW_PRODUCT_FAIL,
@@ -33,17 +33,18 @@ import {
 
 // Get All Products
 export const getProduct =
-  (keyword = "", currentPage = 1, price = [0, 25000], category, ratings = 0) =>
+  (keyword = "", currentPage = 1, price = [0, 25000], category) =>
   async (dispatch) => {
     try {
       dispatch({ type: ALL_PRODUCT_REQUEST });
-
-      let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&ratings[gte]=${ratings}`;
+      console.log("current page",currentPage);
+      let link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}`;
 
       if (category) {
-        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}&ratings[gte]=${ratings}`;
+        link = `/api/v1/products?keyword=${keyword}&page=${currentPage}&price[gte]=${price[0]}&price[lte]=${price[1]}&category=${category}`;
       }
-
+      // link=`/api/products`
+      console.log("query link",link);
       const { data } = await axios.get(link);
 
       dispatch({
@@ -53,26 +54,26 @@ export const getProduct =
     } catch (error) {
       dispatch({
         type: ALL_PRODUCT_FAIL,
-        payload: error.response.data.message,
+        payload: error.response?.data?.message,
       });
     }
   };
 
 // Get All Products For Admin
-export const getAdminProduct = () => async (dispatch) => {
+export const getUserProducts = () => async (dispatch) => {
   try {
-    dispatch({ type: ADMIN_PRODUCT_REQUEST });
+    dispatch({ type: USER_PRODUCT_REQUEST });
 
-    const { data } = await axios.get("/api/v1/admin/products");
+    const { data } = await axios.get("/api/v1/me/products");
 
     dispatch({
-      type: ADMIN_PRODUCT_SUCCESS,
+      type: USER_PRODUCT_SUCCESS,
       payload: data.products,
     });
   } catch (error) {
     dispatch({
-      type: ADMIN_PRODUCT_FAIL,
-      payload: error.response.data.message,
+      type: USER_PRODUCT_FAIL,
+      payload: error?.response?.data?.message,
     });
   }
 };

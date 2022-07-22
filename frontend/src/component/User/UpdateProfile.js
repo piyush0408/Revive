@@ -3,6 +3,8 @@ import "./UpdateProfile.css";
 import Loader from "../layout/Loader/Loader";
 import MailOutlineIcon from "@material-ui/icons/MailOutline";
 import FaceIcon from "@material-ui/icons/Face";
+import SchoolIcon from '@material-ui/icons/School';
+import CallIcon from '@material-ui/icons/Call';
 import { useDispatch, useSelector } from "react-redux";
 import { clearErrors, updateProfile, loadUser } from "../../actions/userAction";
 import { useAlert } from "react-alert";
@@ -17,6 +19,10 @@ const UpdateProfile = ({ history }) => {
   const { error, isUpdated, loading } = useSelector((state) => state.profile);
 
   const [name, setName] = useState("");
+  const [phoneNo, setPhoneNo] = useState(0);
+  const [rollNo, setRollNo] = useState(0);
+
+
   const [email, setEmail] = useState("");
   const [avatar, setAvatar] = useState();
   const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
@@ -29,6 +35,10 @@ const UpdateProfile = ({ history }) => {
     myForm.set("name", name);
     myForm.set("email", email);
     myForm.set("avatar", avatar);
+    myForm.set("phoneNo", phoneNo);
+    myForm.set("rollNo", rollNo);
+
+
     
     dispatch(updateProfile(myForm));
   };
@@ -50,7 +60,9 @@ const UpdateProfile = ({ history }) => {
     if (user) {
       setName(user.name);
       setEmail(user.email);
-      setAvatarPreview(user.avatar.url);
+      setPhoneNo(user.phoneNo);
+      setRollNo(user.rollNo);
+      setAvatarPreview(user?.avatar?.url);
     }
 
     if (error) {
@@ -94,6 +106,28 @@ const UpdateProfile = ({ history }) => {
                     name="name"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                  />
+                </div>
+                <div className="updateProfileName">
+                  <CallIcon />
+                  <input
+                    type="number"
+                    placeholder="Phone No"
+                    required
+                    name="phoneNo"
+                    value={phoneNo}
+                    onChange={(e) => setPhoneNo(e.target.value)}
+                  />
+                </div>
+                <div className="updateProfileName">
+                  <SchoolIcon />
+                  <input
+                    type="number"
+                    placeholder="Roll No"
+                    required
+                    name="rollNo"
+                    value={rollNo}
+                    onChange={(e) => setRollNo(e.target.value)}
                   />
                 </div>
                 <div className="updateProfileEmail">

@@ -38,13 +38,11 @@ const UpdateProduct = ({ history, match }) => {
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-    "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
+    "laptop",
+    "vehicles",
     "Camera",
-    "SmartPhones",
+    "smartPhones",
+    "help",
   ];
 
   const productId = match.params.id;
@@ -72,7 +70,7 @@ const UpdateProduct = ({ history, match }) => {
 
     if (isUpdated) {
       alert.success("Product Updated Successfully");
-      history.push("/admin/products");
+      history.push("/account");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
   }, [
@@ -93,9 +91,9 @@ const UpdateProduct = ({ history, match }) => {
 
     myForm.set("name", name);
     myForm.set("price", price);
-    myForm.set("description", description);
+    // myForm.set("description", description);
     myForm.set("category", category);
-    myForm.set("Stock", Stock);
+    // myForm.set("Stock", Stock);
 
     images.forEach((image) => {
       myForm.append("images", image);
@@ -128,7 +126,7 @@ const UpdateProduct = ({ history, match }) => {
     <Fragment>
       <MetaData title="Create Product" />
       <div className="dashboard">
-        <SideBar />
+        {/* <SideBar /> */}
         <div className="newProductContainer">
           <form
             className="createProductForm"
@@ -158,7 +156,7 @@ const UpdateProduct = ({ history, match }) => {
               />
             </div>
 
-            <div>
+            {/* <div>
               <DescriptionIcon />
 
               <textarea
@@ -168,7 +166,7 @@ const UpdateProduct = ({ history, match }) => {
                 cols="30"
                 rows="1"
               ></textarea>
-            </div>
+            </div> */}
 
             <div>
               <AccountTreeIcon />
@@ -185,7 +183,7 @@ const UpdateProduct = ({ history, match }) => {
               </select>
             </div>
 
-            <div>
+            {/* <div>
               <StorageIcon />
               <input
                 type="number"
@@ -194,7 +192,7 @@ const UpdateProduct = ({ history, match }) => {
                 onChange={(e) => setStock(e.target.value)}
                 value={Stock}
               />
-            </div>
+            </div> */}
 
             <div id="createProductFormFile">
               <input

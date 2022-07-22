@@ -39,21 +39,24 @@ import {
 import axios from "axios";
 
 // Login
-export const login = (email, password) => async (dispatch) => {
+export const login = (name,email ) => async (dispatch) => {
   try {
+    console.log("in user login action 1");
     dispatch({ type: LOGIN_REQUEST });
-
+    console.log("in user login action 2");
     const config = { headers: { "Content-Type": "application/json" } };
-
+    console.log("in user login action 3");
     const { data } = await axios.post(
       `/api/v1/login`,
-      { email, password },
+      { name, email },
       config
     );
-
-    dispatch({ type: LOGIN_SUCCESS, payload: data.user });
+    console.log("in user login action 4");
+   console.log(data.user);
+    dispatch({ type: LOGIN_SUCCESS, payload: data.user});
+    console.log("in user login action 5");
   } catch (error) {
-    dispatch({ type: LOGIN_FAIL, payload: error.response.data.message });
+    dispatch({ type: LOGIN_FAIL, payload: error?.response?.data?.message });
   }
 };
 
@@ -84,7 +87,7 @@ export const loadUser = () => async (dispatch) => {
 
     dispatch({ type: LOAD_USER_SUCCESS, payload: data.user });
   } catch (error) {
-    dispatch({ type: LOAD_USER_FAIL, payload: error.response.data.message });
+    dispatch({ type: LOAD_USER_FAIL, payload: error?.response?.data?.message });
   }
 };
 

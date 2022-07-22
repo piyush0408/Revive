@@ -13,3 +13,6 @@ const connectDatabase = () => {
 };
 
 module.exports = connectDatabase;
+
+
+// DB=mongodb+srv://lohiya_piyush04:Raghav1234$@cluster0.j1xxh.mongodb.net/ecommerce?retryWrites=true&w=majority

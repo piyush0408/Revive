@@ -7,14 +7,14 @@ const Footer = () => {
   return (
     <footer id="footer">
       <div className="leftFooter">
-        <h4>DOWNLOAD OUR APP</h4>
-        <p>Download App for Android and IOS mobile phone</p>
+        <h4>Github</h4>
+        {/* <p>Download App for Android and IOS mobile phone</p>
         <img src={playStore} alt="playstore" />
-        <img src={appStore} alt="Appstore" />
+        <img src={appStore} alt="Appstore" /> */}
       </div>
 
       <div className="midFooter">
-        <h1>ECOMMERCE.</h1>
+        <h2>Polymer</h2>
         <p>High Quality is our first priority</p>
 
         <p>Copyrights 2021 &copy; Piyushlohiya</p>

@@ -2,9 +2,9 @@ import {
   ALL_PRODUCT_FAIL,
   ALL_PRODUCT_REQUEST,
   ALL_PRODUCT_SUCCESS,
-  ADMIN_PRODUCT_REQUEST,
-  ADMIN_PRODUCT_SUCCESS,
-  ADMIN_PRODUCT_FAIL,
+  USER_PRODUCT_REQUEST,
+  USER_PRODUCT_SUCCESS,
+  USER_PRODUCT_FAIL,
   NEW_PRODUCT_REQUEST,
   NEW_PRODUCT_SUCCESS,
   NEW_PRODUCT_FAIL,
@@ -37,7 +37,7 @@ import {
 export const productsReducer = (state = { products: [] }, action) => {
   switch (action.type) {
     case ALL_PRODUCT_REQUEST:
-    case ADMIN_PRODUCT_REQUEST:
+    case USER_PRODUCT_REQUEST:
       return {
         loading: true,
         products: [],
@@ -51,13 +51,13 @@ export const productsReducer = (state = { products: [] }, action) => {
         filteredProductsCount: action.payload.filteredProductsCount,
       };
 
-    case ADMIN_PRODUCT_SUCCESS:
+    case USER_PRODUCT_SUCCESS:
       return {
         loading: false,
         products: action.payload,
       };
     case ALL_PRODUCT_FAIL:
-    case ADMIN_PRODUCT_FAIL:
+    case USER_PRODUCT_FAIL:
       return {
         loading: false,
         error: action.payload,

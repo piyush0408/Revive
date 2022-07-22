@@ -12,29 +12,30 @@ import SpellcheckIcon from "@material-ui/icons/Spellcheck";
 import AttachMoneyIcon from "@material-ui/icons/AttachMoney";
 import SideBar from "./Sidebar";
 import { NEW_PRODUCT_RESET } from "../../constants/productConstants";
+import {  useHistory } from "react-router-dom";
 
-const NewProduct = ({ history }) => {
+
+const NewProduct = ({ product }) => {
   const dispatch = useDispatch();
+  const history=useHistory();
   const alert = useAlert();
 
   const { loading, error, success } = useSelector((state) => state.newProduct);
 
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
+  const [name, setName] = useState(product?.name||"");
+  const [price, setPrice] = useState(product?.price||0);
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState(product?.category||"");
   const [Stock, setStock] = useState(0);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState(product?.images||[]);
   const [imagesPreview, setImagesPreview] = useState([]);
 
   const categories = [
-    "Laptop",
-    "Footwear",
-    "Bottom",
-    "Tops",
-    "Attire",
-    "Camera",
-    "SmartPhones",
+    "laptop",
+    "vehicles",
+    "camera",
+    "smartPhones",
+    "help"
   ];
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const NewProduct = ({ history }) => {
 
     if (success) {
       alert.success("Product Created Successfully");
-      history.push("/admin/dashboard");
+      history.push("/account");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
   }, [dispatch, alert, error, history, success]);
@@ -57,13 +58,14 @@ const NewProduct = ({ history }) => {
 
     myForm.set("name", name);
     myForm.set("price", price);
-    myForm.set("description", description);
+    // myForm.set("description", description);
     myForm.set("category", category);
-    myForm.set("Stock", Stock);
+    // myForm.set("Stock", Stock);
 
     images.forEach((image) => {
       myForm.append("images", image);
     });
+    console.log("new product info", myForm);
     dispatch(createProduct(myForm));
   };
 
@@ -91,7 +93,7 @@ const NewProduct = ({ history }) => {
     <Fragment>
       <MetaData title="Create Product" />
       <div className="dashboard">
-        <SideBar />
+        {/* <SideBar /> */}
         <div className="newProductContainer">
           <form
             className="createProductForm"
@@ -120,7 +122,7 @@ const NewProduct = ({ history }) => {
               />
             </div>
 
-            <div>
+            {/* <div>
               <DescriptionIcon />
 
               <textarea
@@ -130,7 +132,7 @@ const NewProduct = ({ history }) => {
                 cols="30"
                 rows="1"
               ></textarea>
-            </div>
+            </div> */}
 
             <div>
               <AccountTreeIcon />
@@ -144,7 +146,7 @@ const NewProduct = ({ history }) => {
               </select>
             </div>
 
-            <div>
+            {/* <div>
               <StorageIcon />
               <input
                 type="number"
@@ -152,7 +154,7 @@ const NewProduct = ({ history }) => {
                 required
                 onChange={(e) => setStock(e.target.value)}
               />
-            </div>
+            </div> */}
 
             <div id="createProductFormFile">
               <input
