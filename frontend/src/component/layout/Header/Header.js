@@ -144,6 +144,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAlert } from "react-alert";
 import { logout } from "../../../actions/userAction";
+import Revive from "../../../Assets/Revive.png"
 
 
 
@@ -205,7 +206,10 @@ const Header = () => {
   return (
    <div className="headerBox">
        <div className="logo">
-         <Link to="/">Revive</Link> 
+         <Link to="/">
+          <img src ={Revive} alt="Revive" className="reviveIcon"/>
+           Revive
+          </Link> 
        </div>
        <div>
        

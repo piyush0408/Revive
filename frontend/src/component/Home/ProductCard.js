@@ -25,7 +25,8 @@ const ProductCard = ({ product, showAction }) => {
   };
 
   const editHandler = () => {
-    const url = `/product/${product._id}`;
+    const url = `/admin/product/${product._id}`;
+    console.log("pushing url",url)
     history.push(url);
     // console.log(" product id id:", id)
   };
@@ -44,7 +45,7 @@ const ProductCard = ({ product, showAction }) => {
       />
       
      <p>{product.name}</p>
-    <Link  className="ownerLink" to={`/user/${product?.user?._id}`} >{product.user?.name}</Link>
+    <Link  className="ownerLink" to={`/user/${product?.user?._id}`} >@{product.user?.name}</Link>
    
       
       
@@ -72,7 +73,7 @@ const ProductCard = ({ product, showAction }) => {
             style={{ background: "tomato", border: "1px solid  tomato" }}
             onClick={deleteProductHandler}
           >
-            {" "}
+           
             Delete
           </Button>
         </div>

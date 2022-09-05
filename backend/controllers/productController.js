@@ -133,7 +133,7 @@ exports.updateProduct = catchAsyncErrors(async (req, res, next) => {
   if (!product) {
     return next(new ErrorHander("Product not found", 404));
   }
-
+console.log("updating product",req.body);
   // Images Start Here
   let images = [];
 

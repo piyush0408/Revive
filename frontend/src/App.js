@@ -87,9 +87,9 @@ function App() {
       )} */}
 
       <Switch>
-        <ProtectedRoute exact path="/" component={Home} />
-        <ProtectedRoute exact path="/product/:id" component={ProductDetails} />
-        <ProtectedRoute exact path="/products" component={AllProducts} />
+        {/* <ProtectedRoute exact path="/" component={Home} /> */}
+        {/* <ProtectedRoute exact path="/product/:id" component={ProductDetails} /> */}
+        <ProtectedRoute exact path="/" component={AllProducts} />
         <ProtectedRoute path="/products/:keyword" component={Products} />
 
         {/* <ProtectedRoute exact path="/search" component={Search} /> */}
@@ -160,12 +160,12 @@ function App() {
           component={UserProducts}
         />
 
-        {/* <Route
+        <ProtectedRoute
           exact
           path="/admin/product/:id"
-          isAdmin={true}
+          // isAdmin={true}
           component={UpdateProduct}
-        /> */}
+        />
         <ProtectedRoute
           exact
           path="/user/:id"

@@ -7,7 +7,13 @@ import "./AllProducts.css";
 import ProductCard from "../Home/ProductCard";
 import { useAlert } from "react-alert";
 import Loader from "../layout/Loader/Loader";
-
+const categories = [
+  "Laptop",
+  "Vehicles",
+  "Camera",
+  "SmartPhones",
+  "Freebies",
+];
 const AllProducts = () => {
   const dispatch = useDispatch();
   const alert = useAlert();
@@ -92,9 +98,9 @@ const AllProducts = () => {
     />
   );
 
-  const categories=[
-    'laptop','vehicles',''
-    ]
+  // const categories=[
+  //   'laptop','vehicles',''
+  //   ]
 
   return (
     <>
@@ -144,10 +150,11 @@ const AllProducts = () => {
                 </>
               ) : (
                 <>
-                  <button onClick={() => setCategory("laptop")}>laptop</button>{" "}
-                  <button onClick={() => setCategory("vehicles")}>
-                    Vehicles
-                  </button>
+               
+                 
+                    {categories.map((cat)=><Button  onClick={() => setCategory(cat)} >{cat}</Button>)}
+                  
+                 
                 </>
               )}
             </Modal>

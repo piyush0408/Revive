@@ -164,7 +164,7 @@ const Profile = ({ history , match}) => {
             <div>
               <div>
                 <h4>Full Name</h4>
-                <p>{user.name}</p>
+                <p style={{textTransform:"capitalize"}}>{user.name}</p>
               </div>
               <div>
                 <h4>Email</h4>

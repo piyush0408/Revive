@@ -336,6 +336,17 @@ li {
 .logo> a{
   color: white;
   text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+.logo> a:hover{
+  color: white;
+  text-decoration: none;
+}
+
+.reviveIcon{
+  height: 20px;
+  color: white;
 }
 .personDropdown {
   /* width: 40px; */
